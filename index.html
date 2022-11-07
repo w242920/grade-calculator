@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>成績分級系統</title>
+    <link rel="stylesheet" href="./grade.css">
+</head>
+<body>
+    <main>
+    <div class="grade_input">
+        <h1 class="grade_input_title">成績分級系統</h1>
+        <h2 class="grade_input_content">請輸入考試成績：</h2>
+        <input type="text" placeholder="請輸入數字" value="">
+        <button>計算!!</button>
+        <p class="output">您輸入的分數是89分，你的學習成績是乙級</p>
+    </div>
+    <div class="grade_standard">
+        <h2 class="grade_standard_title">成績參考標準</h2>
+        <p class="gs grade_standard_A">0~59=>您的成績不及格</p>
+        <p class="gs grade_standard_B">60~69=>您的成績是丁級</p>
+        <p class="gs grade_standard_C">70~79=>您的成績是丙級</p>
+        <p class="gs grade_standard_D">80~89=>您的成績是乙級</p>
+        <p class="gs grade_standard_E">90~99=>您的成績是甲級</p>
+        <p class="gs grade_standard_F">100=>您的成績是優級</p>
+    </div>
+    </main>
+
+    <script>
+        //誰
+        // 輸入框的資料 + 按鈕觸發 + 輸出結果文字
+        const grade_input = document.querySelector('input')
+        const btn = document.querySelector('button')
+        const output = document.querySelector('.output')
+
+        //什麼時候
+        // 按鈕按下去的時候
+        btn.onclick = function(){
+        //例外排除：
+        //1.無輸入直接按(檢查字串是否為空，與空白鍵相同概念) 
+        //2.空白鍵(將字串中所有的空白刪除後，如果是空值就不行) 
+        //3.非數字(用isNaN(is not a number的縮寫)解決) 
+        //4.小數點->isInteger偵測是否為小數->Number轉換為數值->!轉換true和false
+
+        if(grade_input.value > 100 || grade_input.value < 0 || isNaN(grade_input.value)  || grade_input.value.trim() == '' || !Number.isInteger(Number(grade_input.value))){
+            output.innerHTML = '輸入內容有問題，請重新輸入'
+        }else{
+            if (grade_input.value == 100){
+            result = '優級'
+            }else if(grade_input.value >= 90){
+            result = '甲級' 
+            }else if(grade_input.value >= 80){
+            result = '乙級'
+            }else if(grade_input.value >= 70){
+            result = '丙級'
+            }else if(grade_input.value >= 60){
+            result = '丁級'
+            }else{
+            result = '不及格'
+            }
+            output.innerHTML = '您輸入的分數是' + grade_input.value + '分，您的學期成績是：' + result
+            }
+        }
+
+        //做什麼
+        // 取得輸入框的資料 -> 進行判斷決定等級 -> 將分數與成績輸出在畫面上
+    </script>
+</body>
+</html>
